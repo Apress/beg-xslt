@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<replacements xml:space="preserve">
+  <search>-01-</search><replace> Jan </replace>
+  <search>-02-</search><replace> Feb </replace>
+  <search>-03-</search><replace> Mar </replace>
+  <search>-04-</search><replace> Apr </replace>
+  <search>-05-</search><replace> May </replace>
+  <search>-06-</search><replace> Jun </replace>
+  <search>-07-</search><replace> Jul </replace>
+  <search>-08-</search><replace> Aug </replace>
+  <search>-09-</search><replace> Sep </replace>
+  <search>-10-</search><replace> Oct </replace>
+  <search>-11-</search><replace> Nov </replace>
+  <search>-12-</search><replace> Dec </replace>
+  <search>T</search><replace> </replace>
+</replacements>

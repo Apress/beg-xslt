@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>TV Guide</title>
+    <link rel="stylesheet" href="TVGuide.css" />
+    <script type="text/javascript">
+      function toggle(element) {
+        if (element.style.display == 'none') {
+          element.style.display = 'block';
+        } else {
+          element.style.display = 'none';
+        }
+      }
+    </script>
+    <script type="text/javascript">
+
+      // Create Document objects
+      var xmlDOM = createDocumentObject();
+      var xslDOM = createDocumentObject();
+      
+      // Load XML and stylesheet documents
+      xmlDOM.load('TVGuide.xml');
+      xslDOM.load('TVGuide4.xsl');
+
+      // Check for parse errors
+      if (xmlDOM.parseError.errorCode != 0) {
+        reportParseError(xmlDOM.parseError);
+      }
+      if (xslDOM.parseError.errorCode != 0) {
+        reportParseError(xslDOM.parseError);
+      }
+
+      try {
+        // Create Template object
+        xslTemplate = new ActiveXObject('MSXML2.XSLTemplate.3.0');
+        
+        // Compile the stylesheet into the Template object
+        xslTemplate.stylesheet = xslDOM;
+
+        // Create a Processor object
+        var xslProcessor = xslTemplate.createProcessor();
+
+        // Set the processor input
+        xslProcessor.input = xmlDOM;
+
+      }
+      catch (exception) {
+        alert(exception.description);
+      }
+
+      function displayTransformedXML(sortOrder) {
+        try {
+          xslProcessor.addParameter('sortOrder', sortOrder);
+          xslProcessor.transform();
+          result.innerHTML = xslProcessor.output;
+        } catch (exception) {
+          alert(exception.description);
+        }
+      }
+
+      function createDocumentObject() {
+        var DOM = new ActiveXObject('MSXML2.FreeThreadedDOMDocument.3.0');
+        DOM.async = false;
+        DOM.validateOnParse = false;
+        DOM.preserveWhiteSpace = true;
+        return DOM;
+      }
+
+      function reportParseError( error ) {
+        alert('Error parsing ' + error.url + 
+              ' at ' + error.line + ':' + error.linepos +
+              ':\n' + error.reason);
+        return;
+      }
+
+    </script>
+  </head>
+  <body onload="displayTransformedXML('ascending')">
+    <h1>TV Guide</h1>
+    <div id="result">
+    </div>
+  </body>
+</html>

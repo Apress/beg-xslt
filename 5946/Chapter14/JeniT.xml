@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Prefs>
+  <Programs>
+    <Program channel="BBC2" start="2001-07-05T21:50:00" />
+  </Programs>
+  <Series>
+    <Series ref="EastEnders" /> 
+    <Series ref="AllyMcBeal" />
+    <Series ref="StarTrekNextGeneration" />
+  </Series>
+  <Keywords>
+    <Keyword>Sci-fi</Keyword>
+    <Keyword>news</Keyword>
+    <Keyword>Earth</Keyword>
+  </Keywords>
+</Prefs>

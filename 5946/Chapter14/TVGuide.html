@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>TV Guide</title>
+    <script type="text/javascript">
+
+      function displayTransformedXML() {
+        // Create Document objects
+        var xmlDOM = createDocumentObject();
+        var xslDOM = createDocumentObject();
+        
+        // Load XML and stylesheet documents
+        xmlDOM.load('TVGuide.xml');
+        xslDOM.load('TVGuide.xsl');
+
+        // Check for parse errors
+        if (xmlDOM.parseError.errorCode != 0) {
+          reportParseError(xmlDOM.parseError);
+          return;
+        }
+        if (xslDOM.parseError.errorCode != 0) {
+          reportParseError(xslDOM.parseError);
+          return;
+        }
+
+        // Display document element names
+        xmlDocEleName = xmlDOM.documentElement.tagName;
+        xslDocEleName = xslDOM.documentElement.tagName;
+        result.innerHTML = 
+          ('<p>XML Document Element: ' + xmlDocEleName + '</p>' +
+           '<p>XSLT Document Element: ' + xslDocEleName + '</p>');
+      }
+
+      function createDocumentObject() {
+        var DOM = new ActiveXObject('MSXML2.FreeThreadedDOMDocument');
+        DOM.async = false;
+        DOM.validateOnParse = false;
+        DOM.preserveWhiteSpace = true;
+        return DOM;
+      }
+
+      function reportParseError( error ) {
+        alert('Error parsing ' + error.url + 
+              ' at ' + error.line + ':' + error.linepos +
+              ':\n' + error.reason);
+        return;
+      }
+
+    </script>
+  </head>
+  <body id="result" onload="displayTransformedXML()">
+  </body>
+</html>
